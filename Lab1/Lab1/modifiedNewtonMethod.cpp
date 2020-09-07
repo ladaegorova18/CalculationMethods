@@ -7,12 +7,11 @@ void modifiedNewtonMethod(double A, double B, double epsilon)
 	printf("Modified Newton method:\n");
 
 	int N = 0;
-	double X1 = 0;
-	double X2 = 0;
 	double X0 = (A + B) / 2;
+	double X1 = A;
+	double X2 = X0;
 
 	double fstDrvX0 = fstDerivative(X0);
-	X1 = X0;
 	while (abs(X2 - X1) > epsilon)
 	{
 		X1 = X2;

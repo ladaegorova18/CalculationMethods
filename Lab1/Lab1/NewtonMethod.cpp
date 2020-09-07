@@ -7,12 +7,9 @@ void newtonMethod(double A, double B, double epsilon)
 	printf("Newton method:\n");
 	int N = 0;
 	double X1 = 0;
-	double X2 = 0;
-	double X0 = 0;
+	double X0 = (A + B) / 2;
+	double X2 = X0;
 
-	X0 = (A + B) / 2;
-
-	X1 = X0;
 	do
 	{
 		int p = 1;
