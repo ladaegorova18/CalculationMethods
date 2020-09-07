@@ -7,36 +7,27 @@ void modifiedNewtonMethod(double A, double B, double epsilon)
 	printf("Modified Newton method:\n");
 
 	int N = 0;
-	double Xk = B;
-	double Xk_1 = 0;
-	double X0 = 0;
-
-	if (function(A) * sndDerivative(A) > 0)
-	{
-		X0 = A;
-	}
-	else if (function(B) * sndDerivative(B) > 0)
-	{
-		X0 = B;
-	}
-	else X0 = (A + B) / 2;
+	double X1 = 0;
+	double X2 = 0;
+	double X0 = (A + B) / 2;
 
 	double fstDrvX0 = fstDerivative(X0);
-	Xk = X0;
-	do
+	X1 = X0;
+	while (abs(X2 - X1) > epsilon)
 	{
-		Xk = Xk_1;
-		Xk_1 = Xk - function(Xk) / fstDrvX0;
+		X1 = X2;
+		X2 = X1 - function(X1) / fstDrvX0;
 		++N;
-	} while (abs(Xk_1 - Xk) > epsilon);
+	}
 
-	double X = (Xk + Xk_1) / 2;
-	double delta = (abs(Xk_1 - Xk)) / 2;
+	double X = (X1 + X2) / 2;
+
+	double delta = (abs(X2 - X1)) / 2;
 
 	printf("Delta: %.10lf\n", delta);
 	printf("X0: %.10lf\n", X0);
 	printf("Steps: %d\n", N);
 	printf("X: %.10lf\n", X);
-	printf("|Xn - Xn-1:|: %.10lf\n", abs(Xk_1 - Xk));
+	printf("|Xn - Xn-1:|: %.10lf\n", abs(X2 - X1));
 	printf("|f(X) - 0|: %.10lf\n", abs(function(X) - 0.0));
 }
