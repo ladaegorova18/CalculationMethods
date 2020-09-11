@@ -9,7 +9,7 @@
 #include "modifiedNewtonMethod.h"
 #include "secantMethod.h"
 
-const double epsilon = 0.00000001;
+const double epsilon = 0.00000000001;
 
 int main()
 {
@@ -31,9 +31,11 @@ int main()
 
     for (auto inter : intervals)
     {
+
         double newA = 0;
         double newB = 0;
         tie(newA, newB) = inter;
+        printf("Roots in interval [%f, %f]\n", newA, newB);
 
         bisection(newA, newB, epsilon);
         std::cout << "\n";

@@ -26,10 +26,10 @@ void bisection(double a, double b, double epsilon)
 	double X = (a + b) / 2;
 	double delta = (b - a) / 2;
 	
-	printf("X0: %.10lf\n", X0);
-	printf("Delta: %.10lf\n", delta);
+	printf("X0: %.14lf\n", X0);
+	printf("Delta: %.14lf\n", delta);
 	printf("Steps: %d\n", N);
-	printf("X: %.10lf\n", X);
-	printf("|Xn - Xn-1:|: %.10lf\n", abs(b - a));
-	printf("|f(X) - 0|: %.10lf\n", abs(function(X) - 0.0));
+	printf("X: %.14lf\n", X);
+	printf("|Xn - Xn-1:|: %.14lf\n", abs(b - a));
+	printf("|f(X) - 0|: %.14lf\n", abs(function(X) - 0.0));
 }
