@@ -4,4 +4,4 @@
 #include <tuple>
 using namespace std;
 
-double polynom(list<tuple<double, double>> table, int n, double x);
+double polynomial(list<tuple<double, double>> table, int n, double x);

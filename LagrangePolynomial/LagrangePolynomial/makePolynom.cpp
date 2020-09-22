@@ -2,7 +2,7 @@
 #include <vector>
 #include <tuple>
 
-double polynom(list<tuple<double, double>> table, int n, double x)
+double polynomial(list<tuple<double, double>> table, int n, double x)
 {
 	vector<double> xValues;
 	vector<double> yValues;
@@ -18,11 +18,12 @@ double polynom(list<tuple<double, double>> table, int n, double x)
 		yValues.push_back(y);
 	}
 
-	double P = 0;
-	for (int k = 0; k < n; ++k)
+	double P = 0.0;
+
+	for (int k = 0; k < n + 1; ++k)
 	{
-		double lk = 1;
-		for (int j = 0; j < n; ++j)
+		double  lk = 1.0;
+		for (int j = 0; j < n + 1; ++j)
 		{
 			if (k != j)
 			{

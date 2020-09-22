@@ -9,13 +9,13 @@ list<tuple<double, double>> makeTable(double a, double b, int m)
 {
 	list<tuple<double, double>> table;
 	double part = (b - a) / m;
-	printf("[Zk, f(Zk)]\n");
-	for (double x = a; x <= b; x += part)
+	printf("Zk \t\t\t f(Zk)\n");
+	for (double x = a; x <= b + part; x += part)
 	{
 		double y = function(x);
 		tuple<double, double> result(x, y);
 		table.push_back(result);
-		printf("[%.14lf, %.14lf]\n", x, y);
+		printf("(%.14lf | %.14lf)\n", x, y);
 	}
 	return table;
 }
@@ -49,7 +49,7 @@ list<tuple<double, double>> sortTable(list<tuple<double, double>> table, double 
 		double x = 0;
 		double y = 0;
 		tie(x, y) = couple;
-		printf("[%.14lf, %.14lf]\n", x, y);
+		printf("(%.14lf | %.14lf)\n", x, y);
 	}
 	return table;
 }

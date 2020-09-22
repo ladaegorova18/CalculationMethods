@@ -13,15 +13,16 @@ int main()
     cout << "Polynomial interpolation problem:\n";
     cout << "Variant 13:\n";
 
-    int m = 0;
+    int m_plus_1 = 0;
     double a = 0;
     double b = 0;
     double x = 0;
     int n = 0;
 
     cout << "Enter number of values in table (m + 1):\n";
-    cin >> m;
-    --m;
+    cin >> m_plus_1;
+    int m = m_plus_1 - 1;
+
     cout << "m:" << m << "\n";
 
     cout << "Enter a:\n";
@@ -29,8 +30,14 @@ int main()
 
     cout << "Enter b:\n";
     cin >> b;
+    while (a >= b)
+    {
+        cout << "Entered an invalid value of b, b should be greater than " << a << ", try again :)" << "\n";
+        cin >> b;
+    }
 
     printf("[a, b]: [%.14lf, %.14lf]", a, b);
+    cout << "\n";
 
     char key;
     list<tuple<double, double>> table = makeTable(a, b, m);
@@ -40,7 +47,7 @@ int main()
         cin >> n;
         while (n > m)
         {
-            cout << "Entered an invalid value of n, n should be less than " << m << ", try again :)" << "\n";
+            cout << "Entered an invalid value of n, n can not be greater than " << m << ", try again :)" << "\n";
             cin >> n;
         }
 
@@ -48,11 +55,12 @@ int main()
         cin >> x;
         printf("x: %.14lf\n", x);
 
-        printf("[Xk, f(Xk)]\n");
+        cout << "Sorted table:\n";
+        printf("Xk \t\t\t f(Xk)\n");
         list<tuple<double, double>> sortedTable = sortTable(table, x);
 
-        double result = polynom(sortedTable, n, x);
-        printf("%.14lf \n", result);
+        double result = polynomial(sortedTable, n, x);
+        printf("Function value in x: %.14lf \n", result);
 
         double prec = precision(result, x);
         printf("precision: %.14lf \n", prec);
