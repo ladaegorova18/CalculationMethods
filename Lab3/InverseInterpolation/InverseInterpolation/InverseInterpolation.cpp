@@ -69,7 +69,7 @@ void secondMethod(std::list<std::tuple<double, double>>& table, double F, int n,
 {
     list<tuple<double, double>> sortedTable = modifiedSort(table, F);
     auto newton = new Newton(sortedTable, n);
-    double result = newton -> bisection(a, b, epsilon);
+    double result = newton -> bisection(a, b, epsilon, F);
     printf("Function value in x: %.14lf \n", result);
 
     double prec = invPrecision(result, F);
