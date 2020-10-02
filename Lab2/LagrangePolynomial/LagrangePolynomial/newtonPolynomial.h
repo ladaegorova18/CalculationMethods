@@ -32,37 +32,30 @@ public:
 	double count(double x)
 	{
 		double P = yValues[0];
-
-		for (int j = 1; j < n; j++)
+		for (int i = 1; i < n; i++)
 		{
-			double something = makeAk(j);
-			for (int k = 0; k < j; k++)
-				something *= x - xValues[k];
-			P += something;
+			double Ai = makeAi(i);
+			for (int k = 0; k < i; k++) 
+				Ai *= (x - xValues[k]);
+			P += Ai;
 		}
 		return P;
 	}
 
 private:
-	unsigned int factorial(int i)
+	double makeAi(int i)
 	{
-		if (i == 0)
-			return 1;
-		return i * factorial(i - 1);
-	}
-
-	double makeAk(int j)
-	{
-		if (j == 0)
-			return yValues[0];
-		double delta = Delta(j, j);
-		return delta / (factorial(j) * pow(step, j));
-	}
-
-	double Delta(int p, int i)
-	{
-		if (p == 1)
-			return yValues[i] - yValues[i - 1];
-		return Delta(p - 1, i) - Delta(p - 1, i - 1);
+		double Ai = 0;
+		for (int j = 0; j <= i; j++)
+		{
+			double w = 1;
+			for (int k = 0; k <= i; k++)
+			{
+				if (k != j)
+					w *= (xValues[j] - xValues[k]);
+			}
+			Ai += yValues[j] / w;
+		}
+		return Ai;
 	}
 };

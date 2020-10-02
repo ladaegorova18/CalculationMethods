@@ -60,12 +60,20 @@ int main()
         printf("Xk \t\t\t f(Xk)\n");
         list<tuple<double, double>> sortedTable = sortTable(table, x);
 
-        auto newtonClass = new Newton(sortedTable, n);
-        double result = newtonClass -> count(x);
-        printf("Function value in x: %.14lf \n", result);
+        cout << "Lagrange method:\n";
+        double lagrangeResult = polynomial(sortedTable, n, x);
+        printf("Function value in x: %.14lf \n", lagrangeResult);
 
-        double prec = precision(result, x);
+        double prec = precision(lagrangeResult, x);
         printf("precision: %.14lf \n", prec);
+
+        cout << "Newton method:\n";
+        auto newtonClass = new Newton(sortedTable, n);
+        double newtonResult = newtonClass -> count(x);
+        printf("Function value in x: %.14lf \n", newtonResult);
+
+        double prec1 = precision(newtonResult, x);
+        printf("precision: %.14lf \n", prec1);
 
         cout << "Enter \"q\" to quit, enter any key to continue with new n and x:\n";
         cin >> key;
