@@ -52,7 +52,7 @@ public:
 	void calcFstDerivative()
 	{
 		firstDerivatives.push_back(fstDerivForFirstPoint(xValues[0]));
-		for (int i = 1; i < xValues.size(); ++i)
+		for (int i = 1; i < xValues.size() - 1; ++i)
 		{
 			firstDerivatives.push_back(fstDeriv(xValues[i]));
 		}
@@ -85,8 +85,9 @@ public:
 	{
 		calcFstDerivative();
 		calcSndDerivative();
+		cout << "Таблица значений функции и её производных:\n";
 
-		cout << " \t x \t \t f(x) \t \t f'(x) calc.\t \t |f'(x)-f'(x) calc.|\t f\"(x) calc. \t |f\"(x) - f\" calc.|\n";
+		cout << " \t x \t \t f(x) \t \t f'(x) calc.\t|f'(x)-f'(x) calc.|\t f\"(x) calc. \t |f\"(x) - f\" calc.|\n";
 		for (int i = 0; i < xValues.size(); ++i)
 		{
 			if (i != 0 || i != xValues.size() - 1)
