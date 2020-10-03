@@ -35,9 +35,14 @@ int main()
             cin >> n;
         }
 
-        cout << "Enter epsilon:\n";
-        cin >> epsilon;
-        printf("x: %.14lf\n", epsilon);
+        printf("Epsilon is %.14lf, do you want to change epsilon? (y/n)\n", epsilon);
+        cin >> key;
+        if (key == 'y')
+        {
+            cout << "Enter epsilon:\n";
+            cin >> epsilon;
+            printf("epsilon: %.14lf\n", epsilon);
+        }
 
         firstMethod(table, F, n);
         secondMethod(table, F, n, a, b, epsilon);
@@ -51,6 +56,8 @@ int main()
 
 void firstMethod(std::list<std::tuple<double, double>>& table, double F, int n)
 {
+    cout << "First method:\n";
+
     list<tuple<double, double>> swappedTable = swapTable(table);
 
     cout << "Sorted table:\n";
@@ -67,6 +74,8 @@ void firstMethod(std::list<std::tuple<double, double>>& table, double F, int n)
 
 void secondMethod(std::list<std::tuple<double, double>>& table, double F, int n, double a, double b, double epsilon)
 {
+    cout << "Second method:\n";
+
     list<tuple<double, double>> sortedTable = modifiedSort(table, F);
     auto newton = new Newton(sortedTable, n);
     double result = newton -> bisection(a, b, epsilon, F);
