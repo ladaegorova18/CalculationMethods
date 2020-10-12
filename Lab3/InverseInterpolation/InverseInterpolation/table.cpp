@@ -10,12 +10,14 @@ list<tuple<double, double>> makeTable(double a, double b, int m)
 	list<tuple<double, double>> table;
 	double part = (b - a) / m;
 	printf("Zk \t\t\t f(Zk)\n");
-	for (double x = a; x < b + part; x += part)
+	double x = a;
+	for (int i = 0; i < m + 1; ++i)
 	{
 		double y = function(x);
 		tuple<double, double> result(x, y);
 		table.push_back(result);
 		printf("(%.14lf | %.14lf)\n", x, y);
+		x += part;
 	}
 	return table;
 }
