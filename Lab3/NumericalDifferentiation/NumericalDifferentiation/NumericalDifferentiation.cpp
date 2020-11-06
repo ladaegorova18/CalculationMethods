@@ -3,6 +3,9 @@
 #include "derivative.h"
 using namespace std;
 
+/// <summary>
+/// Точка входа в программу - ввод данных пользователем и печать результатов
+/// </summary>
 int main()
 {
     setlocale(LC_ALL, "Russian");
