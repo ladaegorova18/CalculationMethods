@@ -984,3 +984,6 @@ _deps
 *.exe
 *.out
 *.app
+/Lab2/LagrangePolynomial/.vs/Interpolation/v16
+/Lab2/LagrangePolynomial/LagrangePolynomial/Debug
+/Lab3
