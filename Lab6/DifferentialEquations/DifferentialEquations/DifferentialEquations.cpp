@@ -50,7 +50,7 @@ int main()
 
             double yAdams = solver->Adams(k); 
             printValue(x, yAdams);
-            if (k == N) printPrecision(solver, yAdams, preciseSolution);
+            printPrecision(solver, yAdams, preciseSolution);
         }
 
         if (k > 0)

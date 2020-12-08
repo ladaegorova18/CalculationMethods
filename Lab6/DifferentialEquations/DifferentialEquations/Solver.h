@@ -90,30 +90,18 @@ public:
 		{
 			table[0][i] = h * func->function(X[i], Y[i]);
 		}
-		/*for (int i = n - 4; i <= n - 1; ++i)
-		{
-			table[1][i] = table[0][i + 1] - table[0][i];
-		}
-		for (int i = n - 4; i <= n - 2; ++i)
-		{
-			table[2][i] = table[1][i + 1] - table[1][i];
-		}
-		for (int i = n - 4; i <= n - 3; ++i)
-		{
-			table[3][i] = table[2][i + 1] - table[2][i];
-		}
-		table[4][n - 4] = table[3][n - 3] - table[3][n - 4];*/
 
 		for (int j = 4; j > 0; j--)
 		{
-			for (int k = 0; k < j; k++)
+			for (int k = n - 4; k < n - 4 + j; k++)
 			{
-				table[k][5 - j] = table[k + 1][4 - j] - table[k][4 - j];
+				table[5 - j][k] = table[4 - j][k + 1] - table[4 - j][k];
 			}
 		}
+
 		double deltayn = table[0][n] + 0.5 * table[1][n - 1] + (5.0 / 12) * table[2][n - 2] + (3.0 / 8) * table[3][n - 3]
 			+ (251.0 / 720) * table[4][n - 4];
-		double y = Y[n - 1] + deltayn;
+		double y = Y[n] + deltayn;
 		Y.push_back(y);
 		return y;
 	}
@@ -241,3 +229,18 @@ table[4].push_back(table[3][n - 3] - table[3][n - 4]);*/
 //	table[k - 2][4] = table[k - 1][3] - table[k - 2][3];
 //}
 //return result;
+
+
+/*for (int i = n - 4; i <= n - 1; ++i)
+{
+	table[1][i] = table[0][i + 1] - table[0][i];
+}
+for (int i = n - 4; i <= n - 2; ++i)
+{
+	table[2][i] = table[1][i + 1] - table[1][i];
+}
+for (int i = n - 4; i <= n - 3; ++i)
+{
+	table[3][i] = table[2][i + 1] - table[2][i];
+}
+table[4][n - 4] = table[3][n - 3] - table[3][n - 4];*/

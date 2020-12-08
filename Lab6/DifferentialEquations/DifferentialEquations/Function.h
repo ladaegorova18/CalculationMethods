@@ -20,7 +20,7 @@ public:
 		this->x0 = x0;
 		this->y0 = y0;
 
-		fstDeriv = -y0 + pow(y0, 2) + 1; //
+		fstDeriv = -y0 + 2 * pow(y0, 2) + 1; //
 		sndDeriv = -fstDeriv + 4 * fstDeriv * y0; // 0
 		trdDeriv = -sndDeriv + 4 * pow(fstDeriv, 2) + 4 * y0 * sndDeriv; // 
 		fourthDeriv = -trdDeriv + 12 * fstDeriv * sndDeriv + 4 * y0 * trdDeriv; // 0
@@ -40,7 +40,7 @@ public:
 
 	double function(double x, double y)
 	{
-		return -y + pow(y, 2) + 1;
+		return -y +  2 * pow(y, 2) + 1;
 	}
 
 	double iDerivative(int i)
