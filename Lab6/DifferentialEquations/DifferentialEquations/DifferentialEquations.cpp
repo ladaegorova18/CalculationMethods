@@ -41,9 +41,6 @@ int main()
     cin >> N;
     cout << "\n";
 
-    cout << "Введите y(0): ";
-    cin >> y0;
-    cout << "\n";
     Solver* solver = new Solver(0, y0, h, N);
 
     cout << "\x1b[32mМетод Тейлора:\x1b[0m" << endl;
@@ -57,6 +54,7 @@ int main()
 
         double y = solver->Taylor(x);
         printValue(X[k + 2], y, Y[k + 2], solver);
+        if (k == N) printYn(y, Y[k + 2]);
     }
     cout << endl;
 
@@ -66,6 +64,7 @@ int main()
     for (int k = 3; k <= N; ++k)
     {
         printValue(X[k + 2], yAdams[k + 2], Y[k + 2], solver);
+        if (k == N) printYn(yAdams[k + 2], Y[k + 2]);
     }
     cout << endl;
 
@@ -74,6 +73,7 @@ int main()
     {
         double yRungeKutta = solver->RungeKutta(k);
         printValue(X[k + 2], yRungeKutta, Y[k + 2], solver);
+        if (k == N) printYn(yRungeKutta, Y[k + 2]);
     }
     cout << endl;
 
@@ -82,24 +82,32 @@ int main()
     {
         double yEuler = solver->Euler(X[k + 2], k);
         printValue(X[k + 2], yEuler, Y[k + 2], solver);
+        if (k == N) printYn(yEuler, Y[k + 2]);
     }
     cout << endl;
 
     cout << "\x1b[32mМетод Эйлера I:\x1b[0m" << endl;
     for (int k = 1; k <= N; ++k)
     {
-        double yEuler = solver->EulerI(X[k + 2], k);
-        printValue(X[k + 2], yEuler, Y[k + 2], solver);
+        double yEulerI = solver->EulerI(X[k + 2], k);
+        printValue(X[k + 2], yEulerI, Y[k + 2], solver);
+        if (k == N) printYn(yEulerI, Y[k + 2]);
     }
     cout << endl;
 
     cout << "\x1b[32mМетод Эйлера II:\x1b[0m" << endl;
     for (int k = 1; k <= N; ++k)
     {
-        double yEuler = solver->EulerII(X[k + 2], k);
-        printValue(X[k + 2], yEuler, Y[k + 2], solver);
+        double yEulerII = solver->EulerII(X[k + 2], k);
+        printValue(X[k + 2], yEulerII, Y[k + 2], solver);
+        if (k == N) printYn(yEulerII, Y[k + 2]);
     }
     cout << endl;
+}
+
+void printYn(double y, double Yn)
+{
+    cout << setprecision(14) << "   |y(xN) - yN|: " << fabs(y - Yn) << endl;
 }
 
 void printValue(double x, double y, double exactValue, Solver* solver)
