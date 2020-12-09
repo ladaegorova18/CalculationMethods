@@ -1,5 +1,8 @@
 #pragma once
+#include "Solver.h"
 
-void printPrecision(Solver* solver, double yRungeKutta, double preciseSolution);
+void printValue(double x, double yAdams, double precision, Solver* solver);
 
-void printValue(double x, double yAdams);
+void printFirstLine();
+
+void printOneString(string line);

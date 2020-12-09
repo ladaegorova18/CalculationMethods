@@ -1,9 +1,23 @@
 #include <iostream>
 #include <clocale>
 #include <iomanip>
+#include <Windows.h>
 #include "Solver.h"
 #include "DifferentialEquations.h"
 using namespace std;
+
+void printFirstLine()
+{
+    printOneString("x");
+    printOneString("y");
+    printOneString("Погрешность");
+    cout << "|" << endl;
+}
+
+void printOneString(string letter)
+{
+    cout << "|" << setw(20) << letter;
+}
 
 int main()
 {
@@ -14,8 +28,10 @@ int main()
 
     double h;
     int N;
-    double y0;
+    double y0 = 0.25; 
     double x0 = 0;
+    vector<double> X;
+    vector<double> Y;
 
     cout << "Введите интервал деления h: ";
     cin >> h;
@@ -30,66 +46,65 @@ int main()
     cout << "\n";
     Solver* solver = new Solver(0, y0, h, N);
 
+    cout << "\x1b[32mМетод Тейлора:\x1b[0m" << endl;
     for (int k = -2; k <= N; ++k)
     {
         double x = x0 + k * h;
-        cout << setprecision(14) << "x: " << x << "\n";
-
         double preciseSolution = solver->presiseSolution(x);
-        cout << setprecision(14) << "Точное решение: " << preciseSolution << "\n";
 
-        cout << "Метод Тейлора: \n";
+        X.push_back(x);
+        Y.push_back(preciseSolution);
 
         double y = solver->Taylor(x);
-        printValue(x, y);
-        printPrecision(solver, y, preciseSolution);
-
-        if (k > 2)
-        {
-            cout << "Метод Адамса: \n";
-
-            double yAdams = solver->Adams(k); 
-            printValue(x, yAdams);
-            printPrecision(solver, yAdams, preciseSolution);
-        }
-
-        if (k > 0)
-        {
-            cout << "Метод Рунге-Кутта: \n";
-
-            double yRungeKutta = solver->RungeKutta(k);
-            printValue(x, yRungeKutta);
-            if (k == N) printPrecision(solver, yRungeKutta, preciseSolution);
-
-            cout << "Метод Эйлера: \n";
-
-            double yEuler = solver->Euler(x, k);
-            printValue(x, yEuler);
-            if (k == N) printPrecision(solver, yEuler, preciseSolution);
-
-            cout << "Метод Эйлера I: \n";
-
-            double yEulerI = solver->EulerI(x, k);
-            printValue(x, yEulerI);
-            if (k == N) printPrecision(solver, yEulerI, preciseSolution);
-
-            cout << "Метод Эйлера II: \n";
-
-            double yEulerII = solver->EulerII(x, k);
-            printValue(x, yEulerII);
-            if (k == N) printPrecision(solver, yEulerII, preciseSolution);
-        }
-        cout << "\n";
+        printValue(X[k + 2], y, Y[k + 2], solver);
     }
+    cout << endl;
+
+    cout << "\x1b[32mМетод Адамса:\x1b[0m" << endl;
+
+    vector<double> yAdams = solver->Adams(N);
+    for (int k = 3; k <= N; ++k)
+    {
+        printValue(X[k + 2], yAdams[k + 2], Y[k + 2], solver);
+    }
+    cout << endl;
+
+    cout << "\x1b[32mМетод Рунге-Кутта:\x1b[0m" << endl;
+    for (int k = 1; k <= N; ++k)
+    {
+        double yRungeKutta = solver->RungeKutta(k);
+        printValue(X[k + 2], yRungeKutta, Y[k + 2], solver);
+    }
+    cout << endl;
+
+    cout << "\x1b[32mМетод Эйлера:\x1b[0m" << endl;
+    for (int k = 1; k <= N; ++k)
+    {
+        double yEuler = solver->Euler(X[k + 2], k);
+        printValue(X[k + 2], yEuler, Y[k + 2], solver);
+    }
+    cout << endl;
+
+    cout << "\x1b[32mМетод Эйлера I:\x1b[0m" << endl;
+    for (int k = 1; k <= N; ++k)
+    {
+        double yEuler = solver->EulerI(X[k + 2], k);
+        printValue(X[k + 2], yEuler, Y[k + 2], solver);
+    }
+    cout << endl;
+
+    cout << "\x1b[32mМетод Эйлера II:\x1b[0m" << endl;
+    for (int k = 1; k <= N; ++k)
+    {
+        double yEuler = solver->EulerII(X[k + 2], k);
+        printValue(X[k + 2], yEuler, Y[k + 2], solver);
+    }
+    cout << endl;
 }
 
-void printValue(double x, double yAdams)
+void printValue(double x, double y, double exactValue, Solver* solver)
 {
-    cout << setprecision(14) << "Значение в точке " << x << " равно " << yAdams << "\n";
+    double precision = solver->precision(y, exactValue);
+    cout << setprecision(14) << "|" << setw(20) << x << "|" << setw(20) << y << "|" << setw(20) << precision << "|" << "\n";
 }
 
-void printPrecision(Solver* solver, double y, double preciseSolution)
-{
-    double precision = solver->precision(y, preciseSolution);
-    cout << setprecision(14) << "Абсолютная погрешность: " << precision << "\n\n";
-}

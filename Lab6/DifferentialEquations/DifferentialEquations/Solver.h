@@ -1,6 +1,8 @@
 #pragma once
 #include "Function.h"
 #include <vector>
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
 class Solver
@@ -46,7 +48,7 @@ public:
 			table.push_back(v);
 		}
 
-		for (int i = -2; i < N; ++i)
+		for (int i = -2; i <= N; ++i)
 		{
 			X.push_back(x0 + h * i);
 		}
@@ -67,7 +69,7 @@ public:
 
 	double presiseSolution(double x)
 	{
-		return 0.25 * (sqrt(7) * tan(0.5 * sqrt(7) * (c + x)) + 1);
+		return 0.25 * (sqrt(7) * tan(0.5 * sqrt(7) * x) + 1);
 	}
 
 	double Taylor(double x)
@@ -77,33 +79,43 @@ public:
 		{
 			y += func->iDerivative(i) * pow(x - x0, i) / factorial(i);
 		}
-		if (Y.size() < 5)
-			Y.push_back(y);
-		return y;
-	}
-
-	double Adams(int n)
-	{
-		n += 1;
-		
-		for (int i = n - 4; i <= n; ++i)
-		{
-			table[0][i] = h * func->function(X[i], Y[i]);
-		}
-
-		for (int j = 4; j > 0; j--)
-		{
-			for (int k = n - 4; k < n - 4 + j; k++)
-			{
-				table[5 - j][k] = table[4 - j][k + 1] - table[4 - j][k];
-			}
-		}
-
-		double deltayn = table[0][n] + 0.5 * table[1][n - 1] + (5.0 / 12) * table[2][n - 2] + (3.0 / 8) * table[3][n - 3]
-			+ (251.0 / 720) * table[4][n - 4];
-		double y = Y[n] + deltayn;
 		Y.push_back(y);
 		return y;
+		//return 0.25 + 7 * x / 8 + 49 * pow(x, 3) / 96 + 343 * pow(x, 5) / 960 + 5831 * pow(x, 7) / 23040;
+	}
+
+	vector<double> Adams(int n)
+	{
+		vector<double> q, dq, d2q, d3q, d4q, results;
+		results.push_back(y0);
+
+		for (int i = 0; i < 5; i++) {
+			q.push_back(h * func->function(X[i], Y[i]));
+		}
+		for (int i = 0; i < 4; i++) {
+			dq.push_back(q[i + 1] - q[i]);
+		}
+		for (int i = 0; i < 3; i++) {
+			d2q.push_back(dq[i + 1] - dq[i]);
+		}
+		for (int i = 0; i < 2; i++) {
+			d3q.push_back(d2q[i + 1] - d2q[i]);
+		}
+		for (int i = 0; i < 1; i++) {
+			d4q.push_back(d3q[i + 1] - d3q[i]);
+		}
+		for (int i = 5; i <= n + 2; i++) 
+		{
+			Y[i] = (Y[i - 1] + q[i - 1] + dq[i - 2] / 2 + 5 * d2q[i - 3] / 12 
+				+ 3 * d3q[i - 4] / 8 + 251 * d4q[i - 5] / 720);
+			q.push_back(h * func->function(X[i], Y[i]));
+			dq.push_back(q[i] - q[i - 1]);
+			d2q.push_back(dq[i - 1] - dq[i - 2]);
+			d3q.push_back(d2q[i - 2] - d2q[i - 3]);
+			d4q.push_back(d3q[i - 3] - d3q[i - 4]);
+		}
+
+		return Y;
 	}
 
 	double RungeKutta(int i)
@@ -244,3 +256,24 @@ for (int i = n - 4; i <= n - 3; ++i)
 	table[3][i] = table[2][i + 1] - table[2][i];
 }
 table[4][n - 4] = table[3][n - 3] - table[3][n - 4];*/
+
+//* n += 1;
+//
+//for (int i = n - 4; i <= n; ++i)
+//{
+//	table[0][i] = h * func->function(X[i], Y[i]);
+//}
+//
+//for (int j = 4; j > 0; j--)
+//{
+//	for (int k = n - 4; k < n - 4 + j; k++)
+//	{
+//		table[5 - j][k] = table[4 - j][k + 1] - table[4 - j][k];
+//	}
+//}
+//
+//double deltayn = table[0][n] + 0.5 * table[1][n - 1] + (5.0 / 12) * table[2][n - 2] + (3.0 / 8) * table[3][n - 3]
+//+ (251.0 / 720) * table[4][n - 4];
+//double y = Y[n] + deltayn;
+//Y.push_back(y);
+//return y; */

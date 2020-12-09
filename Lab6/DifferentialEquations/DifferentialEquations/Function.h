@@ -40,7 +40,7 @@ public:
 
 	double function(double x, double y)
 	{
-		return -y +  2 * pow(y, 2) + 1;
+		return -y + 2 * pow(y, 2) + 1;
 	}
 
 	double iDerivative(int i)
