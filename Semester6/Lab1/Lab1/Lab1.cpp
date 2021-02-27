@@ -41,6 +41,10 @@ int main()
 
     vector<vector<double>> x_x = { {x[0][0] - x_[0][0]}, {x[1][0] - x_[1][0]} };
     double deltaX = norm(x_x) / norm(x);
+
+    /// <summary>
+    /// count norm of matrices |A - A_|, |b - b_|
+    /// </summary>
     cout << "deltaX: " << deltaX << endl;
     vector<vector<double>> dA = { {0, 0}, {0, 0} };
     vector<vector<double>> db = countDelta(b, b_);
@@ -63,6 +67,9 @@ vector<vector<double>> countDelta (vector<vector<double>> A, vector<vector<doubl
     return dA;
 }
 
+/// <summary>
+/// multiply matrix to vector
+/// </summary>
 vector<vector<double>> countX(vector<vector<double>> M, vector<vector<double>> b) 
 {
     vector<vector<double>> x = { {M[0][0] * b[0][0] + M[0][1] * b[1][0]}, {M[1][0] * b[0][0] + M[1][1] * b[1][0]} };
@@ -71,6 +78,9 @@ vector<vector<double>> countX(vector<vector<double>> M, vector<vector<double>> b
     return x;
 }
 
+/// <summary>
+/// count matrix norm (p = 2)
+/// </summary>
 double norm(vector<vector<double>> A)
 {
     double sum = 0;
