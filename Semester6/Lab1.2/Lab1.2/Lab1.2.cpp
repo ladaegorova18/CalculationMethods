@@ -12,22 +12,22 @@ int main()
     cout << "A:" << endl;
     printMatrix(A);
 
-    vector<vector<double>> C = A;
-    C[0][0] = A[0][0] * pow(10, -8);
-    cout << "C:" << endl;
-    printMatrix(C);
+    //vector<vector<double>> C = A;
+    //C[0][0] = A[0][0] * pow(10, -8);
+    //cout << "C:" << endl;
+    //printMatrix(C);
 
-    cout << "Метод Гаусса с выбором главного элемента для матриц A и С:\n";
+    cout << "Метод Гаусса с выбором главного элемента для матрицы А:\n";
     
     vector<double> resultA = gaussWithMainElement(A);
     cout << "Матрица A:" << endl;
     printResult(resultA, "X");
     printPrecision(A, resultA);
 
-    vector<double> resultC = gaussWithMainElement(C);
-    cout << "Матрица C:" << endl;
-    printResult(resultC, "X");
-    printPrecision(C, resultC);
+    //vector<double> resultC = gaussWithMainElement(C);
+    //cout << "Матрица C:" << endl;
+    //printResult(resultC, "X");
+    //printPrecision(C, resultC);
 
     cout << "Метод LU-разложения для нахождения определителя матрицы А:\n";
     double det = LUdecomposition(A.size(), A);
@@ -36,6 +36,26 @@ int main()
     cout << "Обратная матрица для A:\n";
     auto reverseA = reverseMatrix(A, A.size());
     printMatrix(reverseA);
+    printMatrix(multiply(reverseA, A));
+}
+
+vector<vector<double>> multiply(vector<vector<double>> revA, vector<vector<double>> A)
+{
+    int n = A.size();
+    vector<vector<double>> result(n, vector<double>(n));
+    for (size_t i = 0; i < n; ++i)
+    {
+        for (size_t j = 0; j < n; ++j)
+        {
+            double sum = 0;
+            for (size_t k = 0; k < n; ++k)
+            {
+                sum += revA[i][k] * A[k][j];
+            }
+            result[i][j] = sum;
+        }
+    }
+    return result;
 }
 
 void printPrecision(vector<vector<double>> A, vector<double> X)

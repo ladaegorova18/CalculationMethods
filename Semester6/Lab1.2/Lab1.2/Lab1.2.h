@@ -21,6 +21,8 @@ double LUdecomposition(size_t n, vector<vector<double>> A);
 
 vector<vector<double>> Jordan(vector<vector<double>> A);
 
+vector<vector<double>> multiply(vector<vector<double>> revA, vector<vector<double>> A);
+
 vector<vector<double>> reverseMatrix(vector<vector<double>> A, size_t n);
 
 vector<vector<double>> chooseMain(vector<vector<double>> A, int k);
