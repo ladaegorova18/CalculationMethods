@@ -66,13 +66,15 @@ for i in range(1,1+N):
 
 res_table = tabulate(ans,headers=headers,
                tablefmt='github',numalign="right")
+print(res_table)
 with open('result3.txt','w') as file:
     file.write(res_table)
 
 
 #Посмотрим на индекс минимального элемента таблицы. Таким образом, наименьшая погрешность достигается при числе узлов N=100 и параметре а=1e-10, и именно они являются оптимальными параметрами для данной задачи.
 ind = np.unravel_index(np.argmin(ans, axis=None), ans.shape)
-ind
+print(ind)
+
 #Сама погрешность:
 
-ans[ind]
+print(ans[ind])

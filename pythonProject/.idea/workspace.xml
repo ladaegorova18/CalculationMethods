@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7473e999-cf70-4884-944a-95be86ece7c2" name="Default Changelist" comment="" />
+    <list default="true" id="7473e999-cf70-4884-944a-95be86ece7c2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Semester6/Task4/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Semester6/Lab1.2/Lab1.2/Lab1.2.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Semester6/Lab1.2/Lab1.2/Lab1.2.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Semester6/Lab1/Lab1/Lab1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Semester6/Lab1/Lab1/Lab1.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Semester6/LectureLab3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Semester6/LectureLab3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Semester6/Task2/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Semester6/Task2/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Semester6/Task3/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Semester6/Task3/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Semester6/Task4/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Semester6/Task4/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Semester6/Task5/Lib/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Semester6/Task5/Lib/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Semester6/Task5/share/man/man1/isympy.1" beforeDir="false" afterPath="$PROJECT_DIR$/../Semester6/Task5/share/man/man1/isympy.1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Semester6/Task6/Lib/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Semester6/Task6/Lib/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,7 +62,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Semester6/Task2/.idea/Task2.iml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -89,6 +102,9 @@
       <module name="Task2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../Semester6/Task2" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -145,6 +161,9 @@
       <workItem from="1615821835001" duration="2890000" />
       <workItem from="1617360115021" duration="8249000" />
       <workItem from="1617472596185" duration="8899000" />
+      <workItem from="1635015399157" duration="329000" />
+      <workItem from="1646317861039" duration="1413000" />
+      <workItem from="1646930895692" duration="837000" />
     </task>
     <servers />
   </component>

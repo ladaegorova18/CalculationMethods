@@ -2,72 +2,73 @@ from numpy.linalg import eig, inv, norm, cond
 import numpy as np
 from tabulate import tabulate
 
-myA=[
- [3.278164, 1.046583, -1.378574],
- [1.046583, 2.975937, 0.934251],
- [-1.378574, 0.934251, 4.836173]
+A=[
+[9.331343, 1.120045, -2.880925],
+[1.120045, 7.086042, 0.670297],
+[-2.880925, 0.670297, 5.622534]
 ]
 
-myB = [ [-0.527466],
- [2.526877],
- [5.165441]]
+B = [ [7.570463],
+ [8.876384],
+ [3.411906]]
 
-
+# Получение указанного числа знаков после запятой
 def toFixed(numObj, digits=0):
     return f"{numObj:.{digits}f}"
 
-# --- end of исходные данные
-
 # 1)
-# --- вывод системы на экран
-def FancyPrint(A, B, selected):
+# Печать матрицы на экран
+def PrintGauss(A, B, selected):
     for row in range(len(B)):
         print("(", end='')
         for col in range(len(A[row])):
              print("\t{1:10.2f}{0}".format(" " if (selected is None
 or selected != (row, col)) else "*", A[row][col]), end='')
         print("\t) * (\tX{0}) = (\t{1:10.2f})".format(row + 1, B[row][0]))
-# --- end of вывод системы на экран
 
-# --- перемена местами двух строк системы
+
+# Перемена местами двух строк системы
 def SwapRows(A, B, row1, row2):
     A[row1], A[row2] = A[row2], A[row1]
     B[row1], B[row2] = B[row2], B[row1]
-# --- end of перемена местами двух строк системы
 
-# --- деление строки системы на число
+
+# Деление строки системы на число
 def DivideRow(A, B, row, divider):
     A[row] = [a / divider for a in A[row]]
     B[row][0] /= divider
-# --- end of деление строки системы на число
 
-# --- сложение строки системы с другой строкой, умноженной на число
+
+# Сложение строки системы с другой строкой, умноженной на число
 def CombineRows(A, B, row, source_row, weight):
     A[row] = [(a + k * weight) for a, k in zip(A[row], A[source_row])]
     B[row][0] += B[source_row][0] * weight
-# --- end of сложение строки системы с другой строкой, умноженной начисло
 
-# --- решение системы методом Гаусса (приведением к треугольному виду)
+
+# Решение системы методом Гаусса
 def Gauss(A, B):
     column = 0
     while (column < len(B)):
+
         current_row = None
         for r in range(column, len(A)):
             if current_row is None or abs(A[r][column]) > abs(A[current_row][column]):
                  current_row = r
+
         if current_row is None:
             return None
         if current_row != column:
             SwapRows(A, B, current_row, column)
+
         DivideRow(A, B, column, A[column][column])
         for r in range(column + 1, len(A)):
             CombineRows(A, B, r, column, -A[r][column])
         column += 1
+
     X = [0 for b in B]
     for i in range(len(B) - 1, -1, -1):
         X[i] = B[i][0] - sum(x * a for x, a in zip(X[(i + 1):], A[i][(i + 1):]))
     return X
-# --- end of решение системы методом Гаусса (приведением к треугольному виду)
 
 
 def printVector(X):
@@ -75,11 +76,11 @@ def printVector(X):
 
 # 1)
 print("Исходная система:")
-FancyPrint(myA, myB, None)
+PrintGauss(A, B, None)
 print("Решаем методом Гаусса:")
-xGauss = Gauss(np.copy(myA), np.copy(myB))
+xGauss = Gauss(np.copy(A), np.copy(B))
 printVector(xGauss)
-print("-------------------------------------------------")
+print("##################################################")
 
 # 2)
 def norminf (H):
@@ -136,7 +137,7 @@ def factprecision(x):
     return prec
 
 
-def simpleiter (k, H, g):
+def simpleiteration (k, H, g):
     xk = makezero()
     xklust = makezero()
     for i in range (k):
@@ -156,7 +157,7 @@ def simpleiter (k, H, g):
 
 
 # 5)
-def zeidel (k, H, g):
+def seidel (k, H, g):
     xk = makezero()
     Hl = np.tril(H, k=-1)
     Hr = np.triu(H, k=0)
@@ -199,37 +200,37 @@ def upperrelax(k, H, g):
 
 # 2)
 E = np.eye(3, 3, dtype=np.double)
-Hd = E - inv(np.diag(np.diag(myA))) @ myA
-gD = inv(np.diag(np.diag(myA))) @ myB
-print("Норма H: ", norminf(Hd))
-print("-------------------------------------------------")
+Hd = E - inv(np.diag(np.diag(A))) @ A
+gD = inv(np.diag(np.diag(A))) @ B
+print("Норма Hd: ", norminf(Hd))
+print("##################################################")
 
 
 # 3)
 print("Априорная погрешность для х(7): ", infprecision(7, Hd, gD))
-print("-------------------------------------------------")
+print("##################################################")
 
 
 # 4)
 print("Метод простой итерации: ")
-xsimp, fiter = simpleiter(7, Hd, gD)
-print("-------------------------------------------------")
+xsimp, fiter = simpleiteration(7, Hd, gD)
+print("##################################################")
 
 
 # 5)
 print("Метод Зейделя: ")
-xseid = zeidel(7, Hd, gD)
+xseid = seidel(7, Hd, gD)
 print(xseid)
 fseid = factprecision(xseid)
 
 print("Сравним с решением, полученным методом простой итерации:")
 print(xsimp - xseid)
-print("-------------------------------------------------")
+print("##################################################")
 
 
 # 6)
-print("Радиус: ", radius(Hd))
-print("-------------------------------------------------")
+print("Спектральный радиус: ", radius(Hd))
+print("##################################################")
 
 
 # 7)
@@ -237,7 +238,7 @@ print("Метод верхней релаксации: ")
 uppx = upperrelax(7, Hd, gD)
 print(uppx)
 fuppx = factprecision(uppx)
-print("-------------------------------------------------")
+print("##################################################")
 
 
 # 8)

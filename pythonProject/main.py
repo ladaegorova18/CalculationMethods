@@ -52,3 +52,17 @@ print(X)
 root = eigMethod(X)
 print(root)
 print(root @ root)
+
+operations = {
+    "+" : lambda x, y: x + y,
+    "-" : lambda x, y: x - y,
+    "*" : lambda x, y: x * y,
+    "/" : lambda x, y: x / y
+}
+a, b = map(float, input("Enter numbers:").split())
+
+op = input("Enter operation:")
+if op in operations:
+    print(operations[op](a, b))
+else:
+    print("Unknown operation")
